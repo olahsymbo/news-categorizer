@@ -23,7 +23,7 @@ from nltk.tokenize import word_tokenize
 
 app = Flask(__name__)
 
-@app.route('/categorize', methods=['POST'])
+@app.route('/categorize', methods=['GET'])
 def categorize():
     
     if textmodel:
