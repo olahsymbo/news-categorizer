@@ -18,4 +18,4 @@ Deep Neural Network (DNN) is used for performing classification.
 
 ### API
 
-Convert the model into a REST web application, we used Flask and gunicorn as the web application server
+To convert the model into a REST web application, we used Flask and gunicorn as the web application server
