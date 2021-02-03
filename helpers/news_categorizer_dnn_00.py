@@ -113,7 +113,7 @@ enc_length = 3000
 tfidf = TfidfVectorizer(max_df=0.90, min_df=2, stop_words='english', max_features = enc_length)
 tfidf_model = tfidf.fit(X_trainn)
 
-pickle.dump(tfidf_model, open(os.path.join(cate_dir, "tfidfmodel.pkl", "wb")))
+pickle.dump(tfidf_model, open(os.path.join(cate_dir, "../trained_models/tfidfmodel.pkl", "wb")))
 
 # ------------------------------------------------------------------------------------------#
 # create model
@@ -141,7 +141,7 @@ scores = text_model.evaluate(test_feat, Yt)
 print("\n%s: %.2f%%" % (text_model.metrics_names[1], scores[1]*100))
 
 
-text_model.save(open(os.path.join(cate_dir, 'News_Cate.h5')))
+text_model.save(open(os.path.join(cate_dir, '../trained_models/News_Cate.h5')))
 
 path = os.path.join(cate_dir, "data_set/testt.txt")
 testdata = open(path, 'r').read()

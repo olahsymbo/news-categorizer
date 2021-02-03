@@ -1,6 +1,5 @@
 # Dependencies 
 import os
-import sys
 import inspect
 
 app_path = inspect.getfile(inspect.currentframe())
@@ -9,7 +8,6 @@ import sys
 from flask import Flask, request, jsonify
 from sklearn.externals import joblib
 import traceback
-import pandas as pd
 import numpy as np
 import re
 from bs4 import BeautifulSoup
@@ -17,15 +15,13 @@ import tensorflow as tf
 from urllib.request import Request, urlopen 
 from nltk.stem.porter import PorterStemmer
 from keras.models import load_model
-import category_output
-from nltk.tokenize import word_tokenize
-
+from helpers import category_output
 
 app = Flask(__name__)
-tfidf_model = joblib.load(open(os.path.join(cate_dir, "tfidfmodel.pkl"),'rb'))
+tfidf_model = joblib.load(open(os.path.join(cate_dir, "../trained_models/tfidfmodel.pkl"), 'rb'))
 print('text vectorizer loaded')
 
-textmodel = load_model(open(os.path.join(cate_dir, "News_Cate.h5"), 'rb'))
+textmodel = load_model(open(os.path.join(cate_dir, "../trained_models/News_Cate.h5"), 'rb'))
 graph1 = tf.get_default_graph()
 print('Model loaded')
 
