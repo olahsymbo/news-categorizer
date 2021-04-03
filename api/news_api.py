@@ -1,12 +1,13 @@
 # Dependencies 
-import os
+import os, sys
 import inspect
 
 app_path = inspect.getfile(inspect.currentframe())
 cate_dir = os.path.realpath(os.path.dirname(app_path))
-import sys
+sys.path.insert(0, cate_dir)
+
 from flask import Flask, request, jsonify
-from sklearn.externals import joblib
+import joblib
 import traceback
 import numpy as np
 import re
