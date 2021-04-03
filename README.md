@@ -49,11 +49,11 @@ Install postgresql 12.2 (incase it's not installed already).
 
 Create a new postgres database named `news` using:
 
-CREATEDB news;
+`CREATEDB news;`
 
 inside the db shell, create username and password for the database using:
 
-CREATE USER newsdev with encrypted password 'newsdev';
+`CREATE USER newsdev with encrypted password 'newsdev';`
 
 ### Run the NewsCategorizer
 
