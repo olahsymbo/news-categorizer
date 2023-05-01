@@ -1,0 +1,13 @@
+[Unit]
+Description=New Categorizer API Service
+[Install]
+WantedBy=multi-user.target
+[Service]
+User=ubuntu
+PermissionsStartOnly=true
+WorkingDirectory=/home/ubuntu/news-categorizer
+Environment="PATH=/home/ubuntu/news-categorizer/.virtualenv/bin"
+ExecStart=/home/ubuntu/news-categorizer/.virtualenv/bin/gunicorn --bind 0.0.0.0:6000 wsgi_ir:application --log-level=error --workers 3 --timeout 10000
+TimeoutSec=10000
+Restart=on-failure
+RuntimeDirectoryMode=755
