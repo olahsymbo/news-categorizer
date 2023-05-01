@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May 22 22:01:14 2019
-
-@author: olahs
-"""
-
 import os
 import sys
 import inspect
