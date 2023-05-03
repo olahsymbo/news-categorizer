@@ -1,105 +1,35 @@
 import os
 import sys
 import inspect
+import pickle
+import string
 
 app_path = inspect.getfile(inspect.currentframe())
 cate_dir = os.path.realpath(os.path.dirname(app_path))
 
 import numpy as np
 import pandas as pd
-import string
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import word_tokenize
-import pickle
 from nltk.stem.porter import PorterStemmer
 from keras.models import Sequential 
 from keras.layers import Dense, Dropout 
 from keras.models import load_model
 
+from data.dataloader import NewsDataLoader
 
-entertain = os.listdir(os.chdir(os.path.join(cate_dir, 'data_set/bbc/entertainment')))
+main_data_source = 'data/bbc'
 
-files_entertain = []
-target_entertain = np.array([1] * len(entertain))
-for sample in entertain:
-    sl = open(sample, 'r').read()
-    slnn = sl.split()
-    table = str.maketrans('', '', string.punctuation)
-    stripped = sl.translate(table)
-    files_entertain.append(stripped)
-
-
-sport = os.listdir(os.chdir(os.path.join(cate_dir, 'data_set/bbc/sport')))
-
-files_sport = []
-target_sport = np.array([2] * len(sport))
-for sample in sport:
-    spr = open(sample, 'r').read()
-    sprn = spr.split()
-    table = str.maketrans('', '', string.punctuation)
-    sport_stripped = spr.translate(table)
-    files_sport.append(sport_stripped)
-
-
-
-politics = os.listdir(os.chdir(os.path.join(cate_dir, 'data_set/bbc/politics')))
-
-files_politics = []
-target_politics = np.array([3] * len(politics))
-for sample in politics:
-    pol = open(sample, 'r').read()
-    poln = pol.split()
-    table = str.maketrans('', '', string.punctuation)
-    pol_stripped = pol.translate(table)
-    files_politics.append(pol_stripped)
-
-
-
-business = os.listdir(os.chdir(os.path.join(cate_dir, 'data_set/bbc/business')))
-
-files_business = []
-target_business = np.array([4] * len(business))
-for sample in business:
-    buss = open(sample, 'r').read()
-    bussn = buss.split()
-    table = str.maketrans('', '', string.punctuation)
-    buss_stripped = buss.translate(table)
-    files_business.append(buss_stripped)
-
-
-tech = os.listdir(os.chdir(os.path.join(cate_dir, 'data_set/bbc/tech')))
-
-files_tech = []
-target_tech = np.array([5] * len(tech))
-for sample in tech:
-    tec = open(sample, 'r').read()
-    tecn = tec.split()
-    table = str.maketrans('', '', string.punctuation)
-    tec_stripped = tec.translate(table)
-    files_tech.append(tec_stripped)
-
-print(files_entertain)
-print(files_sport)
-print(files_politics)
-print(files_business)
-print(files_tech)
-#print(files_fashion)
-
-datan = []
-datan.extend(files_entertain)
-datan.extend(files_sport)
-datan.extend(files_politics)
-datan.extend(files_business)
-datan.extend(files_tech)
+ndl = NewsDataLoader(main_data_source)
+datan = ndl.load_all_news()
             
 porter = PorterStemmer()
 data = [porter.stem(word) for word in datan]
 
 Target = np.concatenate((target_entertain, target_sport, target_politics, target_business, target_tech))
 
-
-#### splitting data into training and testing set
+# splitting data into training and testing set
 X_trainn, X_testt, y_train, y_test = train_test_split(data, Target, random_state=0, test_size=0.35)
 
 enc_length = 3000
