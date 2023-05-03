@@ -4,6 +4,18 @@ __pycache__/
 
 # C extensions
 *.so
+*.png
+*.jpg
+*.jpeg
+*.tiff
+*.h5
+*.rar
+*.zip
+*.wav
+*.mp3
+*.mp4
+*.mov
+*.pkl
 
 # Distribution / packaging
 .Python
