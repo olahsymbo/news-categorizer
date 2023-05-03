@@ -79,4 +79,6 @@ class NewsDataLoader:
     datan.extend(files_business)
     datan.extend(files_tech)
     
-    return datan
+    target = np.concatenate((target_entertain, target_sport, target_politics, target_business, target_tech))
+    
+    return datan, target
