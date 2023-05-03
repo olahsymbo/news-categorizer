@@ -22,15 +22,13 @@ from data.dataloader import NewsDataLoader
 main_data_source = 'data/bbc'
 
 ndl = NewsDataLoader(main_data_source)
-datan = ndl.load_all_news()
+datan, target = ndl.load_all_news()
             
 porter = PorterStemmer()
 data = [porter.stem(word) for word in datan]
 
-Target = np.concatenate((target_entertain, target_sport, target_politics, target_business, target_tech))
-
 # splitting data into training and testing set
-X_trainn, X_testt, y_train, y_test = train_test_split(data, Target, random_state=0, test_size=0.35)
+X_trainn, X_testt, y_train, y_test = train_test_split(data, target, random_state=0, test_size=0.35)
 
 enc_length = 3000
 tfidf = TfidfVectorizer(max_df=0.90, min_df=2, stop_words='english', max_features = enc_length)
